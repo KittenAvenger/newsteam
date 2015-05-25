@@ -3,8 +3,9 @@ How to run:
 1. git clone https://github.com/KittenAvenger/newsteam
 2. cd newsteam
 3. ./rebar compile
-4. Run the bash script with sh start.sh, check so directory is correct in the bash script
-5. Type main:run() in erlang terminal
+4. Change the advanced.config file to the path of your map beams, e.g. /home/dennis/newsteam/ebin, then put it under dev/*/etc
+5. Run the bash script with sh start.sh, check so directory is correct in the bash script
+6. Type main:run() in erlang terminal
 
 Dependencies needed to run:
 
@@ -12,5 +13,3 @@ Dependencies needed to run:
 * mochiweb
 * php curl
 
-
-Just a test, mate
