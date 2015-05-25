@@ -3,6 +3,8 @@ How to run:
 1. git clone https://github.com/KittenAvenger/newsteam
 2. cd newsteam
 3. ./rebar compile
+4. Run the bash script with sh start.sh, check so directory is correct in the bash script
+5. Type main:run() in erlang terminal
 
 Dependencies needed to run:
 
