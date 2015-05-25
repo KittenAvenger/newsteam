@@ -1,0 +1,10 @@
+How to run:
+
+1. git clone https://github.com/KittenAvenger/newsteam
+2. cd newsteam
+3. ./rebar compile
+
+Dependencies needed to run:
+
+* riak erlang client
+* mochiweb
