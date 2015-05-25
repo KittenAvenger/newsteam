@@ -8,3 +8,4 @@ Dependencies needed to run:
 
 * riak erlang client
 * mochiweb
+* php curl
