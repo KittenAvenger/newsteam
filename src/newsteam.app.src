@@ -1,0 +1,12 @@
+{application, newsteam,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { newsteam_app, []}},
+  {env, []}
+ ]}.
