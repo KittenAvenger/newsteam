@@ -36,7 +36,7 @@ $year= $start->format("[Y,");
 
   // print "fucking shit";
  
- $obj = $bucket->getBinary('[2015,4,17]');
+ $obj = $bucket->getBinary($date);
 $data= $obj -> getData();
 //echo $data;
 echo(json_encode($data));
@@ -59,7 +59,7 @@ $year= $start->format("[Y,");
    
    $date= $year . $new . $new2;
  
- $obj = $bucket->getBinary('[2015,4,17]');
+ $obj = $bucket->getBinary($date);
 $data= $obj -> getData();
 echo(json_encode($data));
 }
