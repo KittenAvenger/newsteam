@@ -60,7 +60,6 @@ connect(),
 {ok,List}=riakc_pb_socket:list_keys(server, <<"hoursplayed">>),
 NewList = list_players(List, []),
 [search(N, 730) || N <- NewList ].	
-%search(lists:flatten(NewList), 730, []).
 
 
 search({Player, GameList}, GameID) ->
@@ -69,14 +68,6 @@ case lists:keyfind(GameID, 1, GameList) of
 	false -> not_found;
 	  _   -> Player 
 	end.
-
-%search ([], _,List)-> List;
-%search([H|T], Element, List) ->
-
-%case H of
-%	{Element, Data} -> search(T, Element, List ++ [{Element, Data}]);
-%	_ -> search(T, Element, List)
-%end.
 
 
 list_players([], List) -> List;
