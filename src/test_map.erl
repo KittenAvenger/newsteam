@@ -42,9 +42,9 @@ Obj.
 
 % Get today's map reduced data
 
-get_data_daily(Y,M,D)->
+get_data_daily(Date)->
 connect(),
-W=tuple_to_list({Y,M,D}),
+W=tuple_to_list(Date),
 Z=term_to_binary(W), 
 get_data(Z).
 
@@ -59,7 +59,7 @@ find_players() ->
 connect(),
 {ok,List}=riakc_pb_socket:list_keys(server, <<"hoursplayed">>),
 NewList = list_players(List, []),
-[search(N, 730) || N <- NewList ].	
+[search(N, element(1, lists:nth(1, get_data_daily(erlang:date())))) || N <- NewList ].	
 
 
 search({Player, GameList}, GameID) ->
@@ -77,7 +77,7 @@ W=riakc_obj:get_value(Object),
 Obj=binary_to_term(W),
 list_players(T, NewList ++ [{binary_to_term(H), Obj}]).
 
-%binary_to_term(H),
+
 % Generate a specific key list
 
 generate_list([])->[];

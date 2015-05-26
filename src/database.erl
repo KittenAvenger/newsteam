@@ -193,6 +193,19 @@ Object = riakc_obj:new(<<"achievements">>, BinaryID, BinaryList),
 riakc_pb_socket:put(server, Object),
 binary_to_list(BinaryID).
 
+store_countries(Countries) ->
+connect(),
+BinaryList=list_to_binary(lists:flatten(io_lib:format("~p",[Countries]))),
+BinaryID=list_to_binary(lists:flatten(io_lib:format("~p",[tuple_to_list(erlang:date())]))),
+Object = riakc_obj:new(<<"countries">>, BinaryID, BinaryList),
+riakc_pb_socket:put(server, Object),
+binary_to_list(BinaryID).
+
+get_countries(Date) ->
+connect(),
+{ok, Object} = riakc_pb_socket:get(server, <<"countries">>, list_to_binary(lists:flatten(io_lib:format("~p",[tuple_to_list(Date)])))),
+binary_to_list(riakc_obj:get_value(Object)).
+
 get_achievements(GameID) ->
 connect(),
 {ok, Object} = riakc_pb_socket:get(server, <<"achievements">>, list_to_binary(GameID)),
