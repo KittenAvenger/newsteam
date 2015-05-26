@@ -10,25 +10,30 @@ start() ->
 ssl:start(),
 application:start(inets),
 TopList = database:get_maphours(erlang:date()),
-{GameID, _} = lists:nth(1, TopList),
-getglobalachievement(GameID).
+{GameID, _} = lists:nth(4, TopList),
+getglobalachievement(GameID, TopList, 4).
 
 
 
-getglobalachievement(GameID) ->
+getglobalachievement(GameID, TopList, Element) ->
 
 ParsedID = integer_to_list(GameID),
-{ok,{_,_,JSON}}=httpc:request(get, {"http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=" ++ ParsedID ++ "&format=json", []},[], []),
+URL = "http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=" ++ ParsedID ++ "&format=json",
+{ok,{_,_,JSON}}=httpc:request(get, {URL, []},[], []),
 {struct, JsonData} = mochijson:decode(JSON),
 
-{_, Data1} = proplists:get_value("achievementpercentages",JsonData),
-Data2 = proplists:get_value("achievements", Data1),
-{array, List} = Data2,
-AchievementList = [ parse(N) || N <- List ],
+case JsonData of
+	[] when Element > 10 -> no_achievements_found;
+	[] when Element =< 10 -> {NewID, _} = lists:nth(Element, TopList), getglobalachievement(NewID, TopList, Element +1);
+	_ -> {_, Data1} = proplists:get_value("achievementpercentages",JsonData),
+	Data2 = proplists:get_value("achievements", Data1),
+	{array, List} = Data2,
+	AchievementList = [ parse(N) || N <- List ],
 
 case AchievementList of
 	[] -> [];
 	_  -> {TopTenList, _} = lists:split(10, AchievementList), database:store_achievements(GameID, TopTenList)
+end
 end.
 
 

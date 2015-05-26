@@ -121,7 +121,7 @@ connect(),
 {ok,Lis}=riakc_pb_socket:list_keys(server, <<"ownedgames">>),
 generate_list(Lis).
 
-% Generate a specific key list
+% Generate a specific key lists
 
 generate_list([])->[];
 generate_list([H|T])->

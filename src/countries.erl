@@ -13,6 +13,7 @@ start () ->
 ssl:start(),
 application:start(inets),
 elem([get_countries(N) || N <- test_map:find_players()], []).	
+%count_players('RU', [get_countries(N) || N <- test_map:find_players()], 0).
 
 
 
@@ -34,6 +35,13 @@ case is_atom(Final = parse(List)) of
 end
 end.
 
+count_players(_, [], Sum) -> Sum;
+count_players(A, [H|T], Sum) ->
+case H of
+	empty -> count_players(A,T, Sum);
+	A ->count_players(A,T, Sum + 1);
+	_ ->count_players(A,T,Sum)
+end.
 
 parse(Countries)->
 [{struct, Data}] = Countries,
@@ -48,7 +56,6 @@ elem(NewTail,T2).
 
 get_elem(A,[],L)->[{A,get_sum([A]++L,0)}];
 get_elem(A,[H|T],NewList)->
-io:format("~p~n", [H]),
 case H of
 	empty -> get_elem(A,T,NewList);
 	%not_found ->get_elem(A,T,NewList);
