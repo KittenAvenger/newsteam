@@ -45,7 +45,8 @@ store_appID(ID, B) ->
 
 BinaryID=term_to_binary(ID),
 Object = riakc_obj:new(<<"ownedgames">>, BinaryID, B),
-riakc_pb_socket:put(server, Object).
+riakc_pb_socket:put(server, Object),
+io:format("Storing app ids ~s~n", [ID]).
 
 
 % Stores game names
@@ -210,6 +211,34 @@ get_achievements(GameID) ->
 connect(),
 {ok, Object} = riakc_pb_socket:get(server, <<"achievements">>, list_to_binary(GameID)),
 binary_to_list(riakc_obj:get_value(Object)).
+
+store_countrycode(CountryCode, CountryName) ->
+connect(),
+Object = riakc_obj:new(<<"countrycodes">>, term_to_binary(CountryCode), term_to_binary(CountryName)),
+riakc_pb_socket:put(server, Object).
+
+get_countrycode(CountryCode) ->
+connect(),
+
+    case riakc_pb_socket:get(server, <<"countrycodes">>, term_to_binary(CountryCode)) of
+    {error, Reason} ->
+        Reason;
+    {ok, Object} ->
+         binary_to_term(riakc_obj:get_value(Object))
+    end.
+
+
+store_countrylist(CountryList) ->
+connect(),
+Object = riakc_obj:new(<<"countrylist">>, term_to_binary('CountryList'), term_to_binary(CountryList)),
+riakc_pb_socket:put(server, Object).
+
+get_countrylist() ->
+connect(),
+{ok, Object} = riakc_pb_socket:get(server, <<"countrylist">>, term_to_binary('CountryList')),
+binary_to_term(riakc_obj:get_value(Object)).
+
+
 
 
 

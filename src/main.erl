@@ -61,6 +61,11 @@ List=["76561197960435530","76561197965032141","76561198088291210"],
 [friendslist:retrieve(ID)|| ID <-List].
 
 
+length([], Length) -> Length;
+length([_|T], Length) -> length(T, Length + 1).
+
+
+
 
 
 
