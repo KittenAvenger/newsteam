@@ -30,3 +30,4 @@ find_country_name(CountryCode) ->
 Data2 = proplists:get_value("name",Data1),
 database:store_countrycode(CountryCode, Data2), 
 Data2.
+

@@ -8,7 +8,8 @@
 
 
 run() ->
-
+gamenames(),
+friendslist(),
 ownedgames(),
 hoursplayed(),
 timer:sleep(1000),
@@ -17,7 +18,9 @@ timer:sleep(1000),
 test_map:get_sum_riak(),
 timer:sleep(1000),
 database:store_map(),
-achievements:start().
+achievements:start(),
+timer:sleep(1000),
+database:store_countries(countrycode:start(countries:start())).
 
 ownedgames() ->
 

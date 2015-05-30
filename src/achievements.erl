@@ -10,8 +10,8 @@ start() ->
 ssl:start(),
 application:start(inets),
 TopList = database:get_maphours(erlang:date()),
-{GameID, _} = lists:nth(4, TopList),
-getglobalachievement(GameID, TopList, 4).
+{GameID, _} = lists:nth(1, TopList),
+getglobalachievement(GameID, TopList, 1).
 
 
 
