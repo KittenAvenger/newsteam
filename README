@@ -5,6 +5,7 @@ How to run:
 3. ./rebar compile
 4. Change the advanced.config file to the path of your map beams, e.g. /home/dennis/newsteam/ebin, then put it under dev/*/etc
 5. Run the bash script with sh start.sh, check so directory is correct in the bash script
+5. If running for first time, run main:once() first
 6. Type main:run() in erlang terminal
 
 Dependencies needed to run:
