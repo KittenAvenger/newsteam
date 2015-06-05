@@ -5,8 +5,8 @@
 % Run this function once to download game names list and country name list
 
 once()->
-gamenames(),
-retrieve_country_list().
+gamename:gamenames(),
+countrycode:retrieve_country_list().
 
 % Retrieves all the owned games from a list of Steam Players
 
