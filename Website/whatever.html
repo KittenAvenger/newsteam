@@ -1,0 +1,87 @@
+ 
+ 
+  
+<html> 
+<body>
+<head><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<div id="container" style="height: 400px; width: 1000px"></div>
+
+
+
+</head>
+
+
+
+<script>
+
+
+
+var chart1 = new Highcharts.Chart({
+chart: {
+            renderTo: 'container',
+            type: 'column'
+        },
+        title: {
+            text: 'Most Played Games'
+        },
+        subtitle: {
+            text: 'Source: Steam'
+        },
+        xAxis: {
+            categories: ['League of legends', 'Dota2', 'Wow', 'Heroes of newerth','Smite','Defense of the ancients','Bloodline Champions','Grand theft Auto', 'Half life',
+'Far cry'],
+            title: {
+                text: 'Games'
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Hours',
+              
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' hours'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Hours played',
+            data: [700, 681, 650, 642, 610,600,520,505,450,400]
+        }]
+    });
+
+
+
+</script> 
+
+</body>
+</html> 
+
+
